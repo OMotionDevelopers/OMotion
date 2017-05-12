@@ -44,6 +44,13 @@ class Rectangle:
 		self.height = height
 	
 
+	def __eq__ (self, other):
+		return self.point == other.point and self.width == other.width and self.height == other.height
+
+
+	def __str__ (self):
+		return 'point: (' + str(self.point.x) + ', ' + str(self.point.y) +'), width = ' + str(self.width) + ', height = ' + str(self.height) + ', area = ' + str(self.area())
+
 	def center (self):
 		'''[summary]
 		
