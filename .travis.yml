@@ -1,0 +1,11 @@
+language: python
+python:
+  - "3.4"
+
+# command for install dependencies
+install: 
+  - pip3 install -r packages.txt
+
+# command to run tests
+script: 
+  - python3 src/test.py
