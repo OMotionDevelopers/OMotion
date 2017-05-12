@@ -1,5 +1,5 @@
 # OMotion 
-[![Build Status](https://travis-ci.org/GiovanniCardamone/OMotion.svg?branch=master)](https://travis-ci.org/GiovanniCardamone/OMotion)
+[![Build Status](https://travis-ci.org/csdm/OMotion.svg?branch=master)](https://travis-ci.org/csdm/OMotion)
 
 OMotion is a python3 application that use computer vision science for analize moovments in the scene.
 Application is builded keeping in mind security area check and surveliance, for this purpose *external modules* can be embeeded in the application for enanche the behaivour.
@@ -10,7 +10,7 @@ first of all, you need to download the application from source:
 $ git clone https://github.com/GiovanniCardamone/OMotion.git
 ```
 
-or download it from git page: [OMotion](https://github.com/GiovanniCardamone/OMotion)
+or download it from git page: [OMotion](https://github.com/csdm/OMotion)
 
 ## Prerequisites
 this software must be installed for use OMotion
@@ -46,5 +46,5 @@ The OMotion software is under the **GNU GENERAL PUBLIC LICENSE v2**.
 Complete list of changes can be found on **CHANGELOG.md** file.
 
 ## Authors
-Claudio Di Mauro <email@here.it> <br>
-Salvatore Something <email@here.it>
+Claudio Di Mauro <claudio.dimauro@live.it> <br>
+Salvatore Auriemma <email@here.it>
