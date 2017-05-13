@@ -26,6 +26,9 @@ class RectAreaFilter (Filter):
 		[description]
 		'''
 		
-		return True if self.minarea < rect.area() and rect.area() < self.maxarea else False
+		if not isinstance(rect, Rectangle):
+			raise ValueError('Invalid filter parameter, must be of type: ' + Rectangle.__module__ + '.' + Rectangle.__name__ + ', got: ' + str(type(rect)))
+
+		return True if self.minarea <= rect.area() and rect.area() <= self.maxarea else False
 
 
