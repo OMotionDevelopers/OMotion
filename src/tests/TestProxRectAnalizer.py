@@ -47,3 +47,23 @@ class TestProxRectAnalizer (unittest.TestCase):
 		self.assertIn(Rectangle(Point(0,0), 20, 20), s)
 		self.assertIn(Rectangle(Point(0,0), 30, 30), s)
 
+
+	def test_multiple_filter_redundancy (self):
+
+		f = RectAreaFilter (300, 950)
+		g = RectAreaFilter (300, 950)
+
+		r = [
+			Rectangle(Point(0,0), 10, 10), #100  -- no
+			Rectangle(Point(0,0), 20, 20), #400  -- yes (in f & g)
+			Rectangle(Point(0,0), 30, 30), #900  -- yes (in f & g)
+			Rectangle(Point(0,0), 40, 40), #1600 -- no
+			Rectangle(Point(0,0), 50, 50), #2500 -- no
+		]
+
+		s = ProxRectAnalizer.filter(r, [f,g])
+
+		self.assertEqual(len(s), 2)
+
+		self.assertIn(Rectangle(Point(0,0), 20, 20), s)
+		self.assertIn(Rectangle(Point(0,0), 30, 30), s)

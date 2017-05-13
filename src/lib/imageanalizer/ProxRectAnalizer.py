@@ -53,5 +53,6 @@ class ProxRectAnalizer:
 			for f in filters:
 				if f.toFilter(r):
 					toReturn.append(r)
+					break
 
 		return toReturn
