@@ -28,3 +28,22 @@ class TestProxRectAnalizer (unittest.TestCase):
 		self.assertIn(Rectangle(Point(0,0), 20, 20), s)
 		self.assertIn(Rectangle(Point(0,0), 30, 30), s)
 
+
+	def test_multiple_filter (self):
+
+		f = RectAreaFilter (300, 500)
+		g = RectAreaFilter (800, 950)
+
+		r = [
+			Rectangle(Point(0,0), 10, 10), #100  -- no
+			Rectangle(Point(0,0), 20, 20), #400  -- yes (in f)
+			Rectangle(Point(0,0), 30, 30), #900  -- yes (in g)
+			Rectangle(Point(0,0), 40, 40), #1600 -- no
+			Rectangle(Point(0,0), 50, 50), #2500 -- no
+		]
+
+		s = ProxRectAnalizer.filter(r, [f,g])
+
+		self.assertIn(Rectangle(Point(0,0), 20, 20), s)
+		self.assertIn(Rectangle(Point(0,0), 30, 30), s)
+

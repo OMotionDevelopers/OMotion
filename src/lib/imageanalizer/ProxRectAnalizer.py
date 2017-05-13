@@ -25,7 +25,7 @@ class ProxRectAnalizer:
 
 	@staticmethod
 	def filter (rects = [], filters = []):
-		'''this function remove all rect does not match filter
+		'''this function add all rect matches filter
 		
 		for each rect, aplly filter
 		
