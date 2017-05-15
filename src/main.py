@@ -1,7 +1,11 @@
+from lib.videocontroller.CameraController import CameraController
+
 def main ():
 	'''
 
 	'''
+	
+	CameraController().analize()
 
 	pass
 

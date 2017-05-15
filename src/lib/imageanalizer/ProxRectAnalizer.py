@@ -13,10 +13,11 @@ class ProxRectAnalizer:
 	def groups (rects = [], filters = []):
 		'''[summary]
 		
+		1) remove rect by filter
+		2) grouop based on distance
+
 		[description]
 		'''
-
-
 
 		rects = ProxRectAnalizer.filter(rects, filters)
 
