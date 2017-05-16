@@ -45,6 +45,13 @@ class Rectangle:
 	
 
 	def __eq__ (self, other):
+		'''
+
+		'''
+		
+		if not isinstance(other, Rectangle):
+			raise ValueError('cant compare with other type')
+
 		return self.point == other.point and self.width == other.width and self.height == other.height
 
 

@@ -1,5 +1,10 @@
 from lib.videocontroller.VideoController import VideoController
 
+from lib.geometry2d.polygons.Rectangle import Rectangle
+from lib.geometry2d.polygons.RotatedRectangle import RotatedRectangle
+
+from lib.drawer.Drawer import Drawer
+
 import cv2
 import numpy as np
 
@@ -70,14 +75,28 @@ class CameraController (VideoController):
 
 	def motiondraw (self, frame):
 
-		for cnt, color in zip(self.oldcnt, self.colors):
-			cv2.drawContours(frame, cnt, -1, color, 1)
+		# for cnt, color in zip(self.oldcnt, self.colors):
+		# 	cv2.drawContours(frame, cnt, -1, color, 1)
+
+		rs = []
+		gs = []
 
 		for i in self.lastcnt:
 			r = cv2.minAreaRect(i)
+			gs.append(RotatedRectangle.fromCv(r))
+
 			r = cv2.boxPoints(r)
 			r = np.int0(r)
-			cv2.drawContours(frame, [r], 0, (255,255,255), 3)
+
+			rs.append(r)
+			
+
+		
+
+		cv2.drawContours(frame, rs, -1, (255,255,255), 3)
+
+		for g in gs:
+			Drawer.draw(frame, g, (255,0,0), 2)
 
 
 	def addCnt(self, cnt):

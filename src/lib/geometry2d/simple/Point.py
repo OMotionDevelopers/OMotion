@@ -68,3 +68,7 @@ class Point:
 
 	def sumcpy (self, offsetx, offsety):
 		return Point(self.x + offsetx, self.y+offsety)
+
+
+	def toCv(self):
+		return (int(self.x), int(self.y))
