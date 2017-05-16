@@ -11,6 +11,9 @@ from lib.imageanalizer.filters.RectAreaFilter import RectAreaFilter
 
 from lib.drawer.Drawer import Drawer
 
+from lib.motionlogger.FileMotionLogger import FileMotionLogger
+from lib.motionlogger.HiFileMotionLogger import HiFileMotionLogger
+
 import cv2
 import numpy as np
 import copy
@@ -25,6 +28,7 @@ class CameraController (VideoController):
 	kernel = None
 	oldcnt = []
 	lastcnt = None
+	rrmotion = None
 	colors = [
 		( 88,  24,  89),
 		(144,  12,  63),
@@ -32,6 +36,7 @@ class CameraController (VideoController):
 		(255,  87,  51),
 		(255, 195,   0)
 	]
+	logger = None
 
 	filters = None
 
@@ -51,6 +56,8 @@ class CameraController (VideoController):
 			RectAreaFilter(150, 100000)
 		]
 
+		self.logger = FileMotionLogger()
+
 		# self.colors = []
 		# o = 127
 		# for i in range(0, 255, o):
@@ -61,6 +68,7 @@ class CameraController (VideoController):
 	def analize (self):
 
 		while self.camera.isOpened():
+			self.rrmotion = []
 
 			ret, frame = self.camera.read()
 			# frame2 = copy.copy(frame)
@@ -69,11 +77,23 @@ class CameraController (VideoController):
 			frame3 = np.zeros(frame.shape, dtype=np.uint8)
 
 
+
+
 			self.motionsearch(frame)
 			# self.motiondraw(frame2)
 			
+			#self.rrmotion e una lista che contiene i rettangoli del movimento per questo frame
+
 			self.drawContoursHistory(frame2)
 			self.drawPolygonsMotion(frame3)
+
+			if self.rrmotion:
+				self.logger.logRotatedRect(self.rrmotion)
+
+
+			# for rr in self.rrmotion:
+			# 	Drawer.drawPolygon(frame, rr, (0,255,0)  , 2)
+			# 	break
 
 			self.show(np.hstack((frame,frame2,frame3)))
 			self.show(self.backg, name='backg')
@@ -92,6 +112,13 @@ class CameraController (VideoController):
 		self.addCnt(cnt)
 		self.lastcnt = cnt
 
+				# rs = []
+		self.rrmotion = []
+
+		for i in self.lastcnt:
+			self.rrmotion.append(ContoursRotatedRectangle.fromCv(i,cv2.minAreaRect(i)))
+
+			
 		
 		
 
@@ -139,21 +166,11 @@ class CameraController (VideoController):
 	 		cv2.drawContours(frame, cnt, -1, color, 1)
 
 	def drawPolygonsMotion (self, frame):
-		rs = []
-		gs = []
 
-		for i in self.lastcnt:
-			r = cv2.minAreaRect(i)
-			gs.append(ContoursRotatedRectangle.fromCv(i,r))
-
-			r = cv2.boxPoints(r)
-			r = np.int0(r)
-
-			rs.append(r)
 			
 		# cv2.drawContours(frame, rs, -1, (255,255,255), 3)
 
-		for g in ProxRectAnalizer.filter(gs, self.filters):
+		for g in ProxRectAnalizer.filter(self.rrmotion, self.filters):
 			Drawer.drawPolygon(frame, g,         (255,0,0)  , 2)
 			Drawer.drawContour(frame, g.contour, (0,0,255), 1)
 

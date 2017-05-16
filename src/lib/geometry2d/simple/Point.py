@@ -49,7 +49,7 @@ class Point:
 		Returns:
 			string -- object string signature value
 		'''
-		return Point.__module__ + '.' + Point.__name__ + '(' + \
+		return Point.__name__ + '(' + \
 			'x: ' + str(self.x) + ', ' + \
 			'y: ' + str(self.y)        + \
 			')' #
