@@ -45,11 +45,28 @@ class Rectangle:
 	
 
 	def __eq__ (self, other):
+		'''
+
+		'''
+		
+		if not isinstance(other, Rectangle):
+			raise ValueError('cant compare with other type')
+
 		return self.point == other.point and self.width == other.width and self.height == other.height
 
 
 	def __str__ (self):
-		return 'point: (' + str(self.point.x) + ', ' + str(self.point.y) +'), width = ' + str(self.width) + ', height = ' + str(self.height) + ', area = ' + str(self.area())
+		'''		
+		return info & contents of Rectangle
+		
+		Returns:
+			string -- object string signature value
+		'''
+		return Rectangle.__module__ + '.' + Rectangle.__name__ + '(' + \
+			'point: '  + str(self.point)  + ', ' + \
+			'width: '  + str(self.width)  + ', ' + \
+			'height: ' + str(self.height)        + \
+			')' #
 
 	def center (self):
 		'''[summary]

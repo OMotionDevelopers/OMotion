@@ -42,6 +42,17 @@ class Point:
 		'''
 		return self.x == other.x and self.y == other.y
 
+	def __str__ (self):
+		'''		
+		return info & contents of Point
+		
+		Returns:
+			string -- object string signature value
+		'''
+		return Point.__module__ + '.' + Point.__name__ + '(' + \
+			'x: ' + str(self.x) + ', ' + \
+			'y: ' + str(self.y)        + \
+			')' #
 
 	def polar (self, distance, angle):
 		'''[summary]
@@ -57,3 +68,7 @@ class Point:
 
 	def sumcpy (self, offsetx, offsety):
 		return Point(self.x + offsetx, self.y+offsety)
+
+
+	def toCv(self):
+		return (int(self.x), int(self.y))

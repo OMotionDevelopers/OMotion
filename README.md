@@ -7,7 +7,7 @@ Application is builded keeping in mind security area check and surveliance, for 
 ## Getting Started
 first of all, you need to download the application from source:
 ```bash
-$ git clone https://github.com/GiovanniCardamone/OMotion.git
+$ git clone https://github.com/csdm/OMotion.git
 ```
 
 or download it from git page: [OMotion](https://github.com/csdm/OMotion)

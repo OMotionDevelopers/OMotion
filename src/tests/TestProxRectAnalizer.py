@@ -10,23 +10,60 @@ import unittest
 
 class TestProxRectAnalizer (unittest.TestCase):
 
-	def test_filters (self):
-
-		r = [
-			Rectangle(Point(0,0), 10, 10), #100
-			Rectangle(Point(0,0), 20, 20), #400
-			Rectangle(Point(0,0), 30, 30), #900
-			Rectangle(Point(0,0), 40, 40), #1600
-			Rectangle(Point(0,0), 50, 50), #2500
-		]
+	def test_filter (self):
 
 		f = RectAreaFilter(150, 950)
+
+		r = [
+			Rectangle(Point(0,0), 10, 10), #100  -- no
+			Rectangle(Point(0,0), 20, 20), #400  -- yes
+			Rectangle(Point(0,0), 30, 30), #900  -- yes
+			Rectangle(Point(0,0), 40, 40), #1600 -- no
+			Rectangle(Point(0,0), 50, 50), #2500 -- no
+		]
 
 
 		s = ProxRectAnalizer.filter(r, [f])
 
-		for i in s:
-			print(i)
+		self.assertIn(Rectangle(Point(0,0), 20, 20), s)
+		self.assertIn(Rectangle(Point(0,0), 30, 30), s)
 
-		self.assertEqual(s[0], Rectangle(Point(0,0), 20, 20))
-		self.assertEqual(s[1], Rectangle(Point(0,0), 30, 30))
+
+	def test_multiple_filter (self):
+
+		f = RectAreaFilter (300, 500)
+		g = RectAreaFilter (800, 950)
+
+		r = [
+			Rectangle(Point(0,0), 10, 10), #100  -- no
+			Rectangle(Point(0,0), 20, 20), #400  -- yes (in f)
+			Rectangle(Point(0,0), 30, 30), #900  -- yes (in g)
+			Rectangle(Point(0,0), 40, 40), #1600 -- no
+			Rectangle(Point(0,0), 50, 50), #2500 -- no
+		]
+
+		s = ProxRectAnalizer.filter(r, [f,g])
+
+		self.assertIn(Rectangle(Point(0,0), 20, 20), s)
+		self.assertIn(Rectangle(Point(0,0), 30, 30), s)
+
+
+	def test_multiple_filter_redundancy (self):
+
+		f = RectAreaFilter (300, 950)
+		g = RectAreaFilter (300, 950)
+
+		r = [
+			Rectangle(Point(0,0), 10, 10), #100  -- no
+			Rectangle(Point(0,0), 20, 20), #400  -- yes (in f & g)
+			Rectangle(Point(0,0), 30, 30), #900  -- yes (in f & g)
+			Rectangle(Point(0,0), 40, 40), #1600 -- no
+			Rectangle(Point(0,0), 50, 50), #2500 -- no
+		]
+
+		s = ProxRectAnalizer.filter(r, [f,g])
+
+		self.assertEqual(len(s), 2)
+
+		self.assertIn(Rectangle(Point(0,0), 20, 20), s)
+		self.assertIn(Rectangle(Point(0,0), 30, 30), s)
