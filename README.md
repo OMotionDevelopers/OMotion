@@ -49,7 +49,7 @@ Complete list of changes can be found on **CHANGELOG.md** file.
 https://www.claudiodimauro.it/OMtion/Documentation
 
 ## Authors
-Claudio Di Mauro </br> 
+Claudio S. Di Mauro: </br> 
 <claudio.dimauro@live.it> - <cl.dimauro@studenti.unina.it></br> 
 </br> 
 Salvatore Auriemma: </br> 
