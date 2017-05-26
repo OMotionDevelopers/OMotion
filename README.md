@@ -50,4 +50,4 @@ https://www.claudiodimauro.it/OMtion/Documentation
 
 ## Authors
 Claudio Di Mauro <claudio.dimauro@live.it> - <cl.dimauro@studenti.unina.it> <br>
-Salvatore Auriemma <salvatore.auriem20gu@gmail.com> - <salvat.auriemma@studenti,unina.it>
+Salvatore Auriemma <salvatore.auriem20gu@gmail.com> - <salvat.auriemma@studenti.unina.it>
