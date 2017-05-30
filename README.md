@@ -46,7 +46,7 @@ The OMotion software is under the **GNU GENERAL PUBLIC LICENSE v2**.
 Complete list of changes can be found on **CHANGELOG.md** file.
 
 ## Documentation
-https://www.claudiodimauro.it/OMtion/Documentation
+http://www.claudiodimauro.it/OMotion/Documentation/
 
 ## Authors
 Claudio S. Di Mauro: </br> 
